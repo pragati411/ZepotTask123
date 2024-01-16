@@ -3,6 +3,7 @@ import { MdClose } from "react-icons/md";
 
 import SearchList from "./SearchList";
 import ChipsContainer from "./ChipsContainer";
+import Chip from "./Chip";
 
 const allItems = [
   "Pragati",
@@ -10,6 +11,10 @@ const allItems = [
   "Delhi",
   "Noida",
   "India",
+  "Mumbai",
+  "Banglore",
+  " Navi Mumbai",
+  "Indore",
   "My name is pragati Shukla",
 ];
 
@@ -52,11 +57,23 @@ const AutoComplete = () => {
     }
   };
 
+  const styles = {
+    chipContainer: {
+      display: "flex",
+      flexWrap: "wrap",
+    },
+  };
+
   return (
     <>
       <div style={{ position: "relative", display: "flex", alignItems: "center", borderBottom: "1px solid black " }}>
-        <ChipsContainer selectedItems={selectedItems} onChipRemove={handleChipRemove} />
-        <div style={{ position: "relative" }}>
+        
+        <div style={styles.chipContainer}>
+      {selectedItems.map((item, index) => (
+        <Chip key={index} item={item} onRemove={handleChipRemove} />
+      ))}
+
+<div style={{ position: "relative" }}>
           <input
             style={{ outline: "none", border: 0, width: "100%", height: "50px" }}
             type="text"
@@ -68,6 +85,8 @@ const AutoComplete = () => {
           />
           {isDropdownVisible && <SearchList filteredItems={filteredItems} onItemClick={handleItemClick} />}
         </div>
+    </div>
+        
       </div>
     </>
   );
